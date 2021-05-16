@@ -13,27 +13,31 @@ check_dir(){
 
 # makes backups and creates symlinks for .bashrc .vimrc and .tmux.conf in hidden .config folder
 simple() {
+  echo "[*] Creating backups.."
+  echo "[backup] .bashrc.bak"
+  cp "$HOME/.bashrc" "$HOME/.bashrc.bak"
+  echo "[backup] .tmux.conf.bak"
+  cp "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
+  echo "[backup] .vimrc.bak"
+  cp "$HOME/.vimrc" "$HOME/.vimrc.bak"
+
   echo "[*] Moving config to .config"
   mv "$PWD/../config" "$HOME/.config"
 
+  echo "[*] Creating Symlinks.."
   # bashrc
-  cp "$HOME/.bashrc" "$HOME/.bashrc.bak"
-  echo "[*][backup] Created .bashrc.bak"
+  echo "[symlink] .bashrc -> .config/bashrc"
   ln -sf "$HOME/.config/bashrc" "$HOME/.bashrc"
-  
   # tmux.conf
-  cp "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
-  echo "[*][backup] Created .tmux.conf.bak"
+  echo "[symlink] .tmux.conf -> .config/tmux.conf"
   ln -sf "$HOME/.config/tmux.conf" "$HOME/.tmux.conf"
-  
   # vimrc
-  cp "$HOME/.vimrc" "$HOME/.vimrc.bak"
-  echo "[*][backup] Created .vimrc.bak"
+  echo "[symlink] .vimrc -> .config/vimrc"
   ln -sf "$HOME/.config/vimrc" "$HOME/.vimrc"
 }
 
 # execution starts here
 check_dir
 simple
-echo "[*] Simple config complete!"
+echo "[*] Simple configuration complete!"
 exit
