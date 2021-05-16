@@ -148,6 +148,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
   " load all the plugins
   call plug#begin('~/.vimplugins')
+  Plug 'sainnhe/sonokai'
+  Plug 'preservim/nerdtree'
   Plug 'z0mbix/vim-shfmt'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-pandoc/vim-pandoc'
@@ -384,8 +386,8 @@ let g:python_slow_sync														= 1
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 Plug 'sainnhe/sonokai'
-"Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
+"Plug 'sheerun/vim-polyglot'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'vim-airline/vim-airline'
 "Plug 'tpope/vim-fugitive'
