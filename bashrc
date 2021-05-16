@@ -141,6 +141,7 @@ alias ls='ls --color=auto'
 alias l='ls'
 alias ls='ls --color=auto'
 alias tr='tree -C -L 2'
+alias tmux='tmux -2'
 #alias cd='cd $1; ls'
 #alias c='clear'
 
