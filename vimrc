@@ -7,7 +7,7 @@
 " It is recommended to make changes after sourcing debian.vim since it alters
 " the value of the 'compatible' option.
 "
-" Enable true color 启用终端24位色
+" Enable true color 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -155,12 +155,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'rwxrob/vim-pandoc-syntax-simple'
   Plug 'cespare/vim-toml'
-  "Plug 'pangloss/vim-javascript'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'PProvost/vim-ps1'
+  Plug 'roxma/vim-tmux-clipboard'
+  "Plug 'pangloss/vim-javascript'
   "Plug 'tpope/vim-fugitive'
   " Plug 'morhetz/gruvbox'
-  Plug 'roxma/vim-tmux-clipboard'
+  "Plug 'pangloss/vim-javascript'
   call plug#end()
 
   hi Normal ctermbg=NONE " for transparent background
@@ -381,18 +382,6 @@ let g:python_slow_sync														= 1
 
 " VIM PLUG SETTINGS
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
-" Declare the list of plugins.
-Plug 'sainnhe/sonokai'
-Plug 'preservim/nerdtree'
-"Plug 'sheerun/vim-polyglot'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'vim-airline/vim-airline'
-"Plug 'tpope/vim-fugitive'
-" List ends here. Plugins become visible to Vim after this call.
-call plug#end()
 
 " THEME AND PLUGIN CONFIGURATION
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
