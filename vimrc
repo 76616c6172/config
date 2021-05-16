@@ -91,6 +91,10 @@ set viminfo='20,<1000,s1000
 let g:loaded_matchparen=1
 set noshowmatch
 
+" Needs to be set before the plugin is called to not throw errors
+" POLYGLOT: don't do syntax highlighting on markdown
+let g:polyglot_disabled = ['markdown']
+
 " Just the defaults, these are changed per filetype by plugins.
 " " Most of the utility of all of this has been superceded by the use of
 " " modern simplified pandoc for capturing knowledge source instead of
@@ -346,8 +350,6 @@ if has('termguicolors')
   set termguicolors
  endif
 
-" POLYGLOT: don't do syntax highlighting on markdown
-let g:polyglot_disabled = ['markdown']
 "set nocompatible
 
 " GO highlighting
