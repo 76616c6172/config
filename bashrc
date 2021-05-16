@@ -9,15 +9,15 @@ case $- in
       *) return;;
 esac
 
-# #completion
-# if [ -e /etc/bashrc ]; then
-#     source /etc/bashrc
-# fi
+#completion
+if [ -e /etc/bashrc ]; then
+    source /etc/bashrc
+fi
 # 
-# # bashcompletion
-# if [ -f /usr/share/bash-completion/ ] && ! shopt -oq posix; then
-#       . /usr/share/bash-completion/
-# fi
+# bashcompletion
+ if [ -f /usr/share/bash-completion/ ] && ! shopt -oq posix; then
+       . /usr/share/bash-completion/
+ fi
 
 # don't put duplicate lines or lines starting with space in the history.    
 # See bash(1) for more options
@@ -39,7 +39,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+#[ -x /u sr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -84,7 +84,7 @@ if [ "$color_prompt" = yes ]; then
     if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
         prompt_color='\[\033[;94m\]'
         info_color='\[\033[1;31m\]'
-        prompt_symbol=💀
+         prompt_symbol=💀
     fi
     case "$PROMPT_ALTERNATIVE" in
         twoline)
@@ -157,12 +157,12 @@ alias tr='tree -C -L 2'
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 # if ! shopt -oq posix; then
-#   if [ -f /usr/share/bash-completion/bash_completion ]; then
-#     . /usr/share/bash-completion/bash_completion
-#   elif [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-#   fi
-# fi
+#    if [ -f /usr/share/bash-completion/bash_completion ]; then
+#      . /usr/share/bash-completion/bash_completion
+#    elif [ -f /etc/bash_completion ]; then
+#      . /etc/bash_completion
+#    fi
+#  fi
 
 # vi mode but keep emacs ctrl+l
 set -o vi

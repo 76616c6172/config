@@ -280,11 +280,13 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 "au BufWritePost ~/.vimrc so ~/.vimrc
 
 " functions keys KEYBINDINGS
-map <F1> :set number!<CR> :set relativenumber!<CR>nmap <F2> :call <SID>SynStack()<CR>
+map <F1> :set number!<CR> :set relativenumber!<CR>
+nmap <F2> :call <SID>SynStack()<CR>
 set pastetoggle=<F3>
 map <F4> :set list!<CR>
-map <F5> :set cursorline!<CR>map <F7> :set spell!<CR>
-"map <F  12> :set fdm=indent<CR>
+map <F5> :set cursorline!<CR>
+map <F7> :set spell!<CR>
+map <F12> :set fdm=indent<CR>
 
 nmap <leader>2 :set paste<CR>i
 
