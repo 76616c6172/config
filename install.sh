@@ -25,16 +25,18 @@ simple() {
   echo "[backing up] ~/.vimrc.bak"
   cp "$HOME/.vimrc" "$HOME/.vimrc.bak"
 
-  echo "[*] Moving backups into config/backups.."
+  # Moving backups to keep everything tidy
+  echo "[*] Moving backups into config/backup"
   mkdir "$PWD/backup"
   for f in .zshrc .bashrc .vimrc .tmux.conf; do
-    mv "$HOME/$f" "$PWD/config/backup"
+    mv "$HOME/$f.bak" "$PWD/backup"
   done
 
-
+  # Hiding the config folder
   echo "[*] Moving config to .configuration"
   mv "$PWD/../config" "$HOME/.configuration"
 
+  # Symlinking to apply the new config files
   echo "[*] Creating Symlinks.."
   # zshrc
   echo "[symlinked] .zshrc -> .configuration/zshrc"
