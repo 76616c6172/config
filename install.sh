@@ -2,11 +2,11 @@
 
 # check if ~/.config already exists, if it does, print error and exit.
 check_dir(){
-  if test -d "$HOME/.config"; then
-    echo "[!][error] A directory named .config already exists in the home directory! Exiting without changes."
+  if test -d "$HOME/.configuration"; then
+    echo "[!][error] A directory named .configuration already exists in the home directory! Exiting without changes."
     exit
-  elif test -f "$HOME/.config"; then
-    echo "[!][error] There is already a file named .config in the home directory! Exiting without changes."
+  elif test -f "$HOME/.configuration"; then
+    echo "[!][error] There is already a file named .configuration in the home directory! Exiting without changes."
     exit
   fi
 }
