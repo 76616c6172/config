@@ -295,7 +295,8 @@ xterm*|rxvt*)
     ;;
 esac
 
-new_line_before_prompt=yes
+# set if you want a newline before each prompt
+new_line_before_prompt='no'
 precmd() {
     # Print the previously configured title
     print -Pn "$TERM_TITLE"
