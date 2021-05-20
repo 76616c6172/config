@@ -127,7 +127,7 @@ alias l='ls --color=auto'
 alias tr='tree -L 2 -C'
  alias ll='ls -la'
 alias gdb='gdb -q'
-alias tmux='tmux -2'
+alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
 
 # vim mode!
 set -o vi
@@ -204,18 +204,32 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-# Green/Blue Prompt:
-#     PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.blue)}%n%(#.💀 .@)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-#     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+    ######################
+    # Double Line prompts:
+    ######################
+    # green/blue 
+    #     PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.blue)}%n%(#.💀 .@)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+    #     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+    #
+    # blue/white 
+    #     PROMPT=$'%F{%(#.blue.blue)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.white.white)}%n%(#.💀 .@        
+    # )%m%b%F{%(#.blue.blue)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]\n└─%B%(#.%F{blue}#.
+    # %F{blue}$)%b%F{reset} '
+    #     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
-# Blue/White Prompt:
-    PROMPT=$'%F{%(#.blue.blue)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.white.white)}%n%(#.💀 .@        
-)%m%b%F{%(#.blue.blue)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]\n└─%B%(#.%F{blue}#.
-%F{blue}$)%b%F{reset} '
-    RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-
-    # Single line prompt
-    #PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
+    ######################
+    # Single line prompts:
+    ######################
+		# One Line Colorless prompt:
+    # PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
+		#
+		# Minimal blue/white prompt:
+		PROMPT=$'%b%F{%(#.blue.blue)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]─%B%(#.%F{blue}#.%F{blue}$)%b%F{reset} '
+		RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+		#
+		# Minimal red/white prompt:
+    # PROMPT=$'%b%F{%(#.red.red)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.red.red)}]─%B%(#.%F{red}#.%F{red}$)%b%F{reset} '
+		# RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
     # enable syntax-highlighting
     if [ -f /home/placeDirectoryorUserNameHere/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
