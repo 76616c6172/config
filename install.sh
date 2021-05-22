@@ -3,7 +3,7 @@
 # exit if the script is not being called from the dir it is in.
 # check if ~/.config already exists, if it does, print error and exit.
 check_dir() {
-	if test ! -e "$PWD/config/install.sh"; then
+	if test ! -e "$PWD/install.sh"; then
     echo "[!][error] Installer must be called from the directory it is in! Exiting without changes."
 		exit 1
   elif test -d "$HOME/.configuration"; then
