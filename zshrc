@@ -253,6 +253,13 @@ alias la='ls -A'
 alias l='ls -'
 alias d='docker'
 
+# autopushd
+DIRSTACKSIZE=10
+setopt autopushd
+setopt pushdignoredups
+setopt pushdsilent
+setopt pushdminus
+
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
