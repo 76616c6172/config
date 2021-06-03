@@ -187,50 +187,15 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+# Prompt
+if [ "$USER" = valar ]; then
+	PROMPT=$'%b%F{%(#.blue.blue)}「%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}」%B%(#.%F{blue}$§.%F{white}§)%b%F{reset} '        
+	RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+else
+	PROMPT=$'%n@%m%b%F{%(#.blue.blue)}「%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}」%B%(#.%F{white}§.%F{white}§)%b%F{reset} '   
+	RPROMPT='%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 fi
-
-if [ "$color_prompt" = yes ]; then
-    ######################
-    # Double Line prompts:
-    ######################
-    # green/blue 
-    #     PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.blue)}%n%(#.💀 .@)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-    #     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-    #
-    # blue/white 
-    #     PROMPT=$'%F{%(#.blue.blue)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.white.white)}%n%(#.💀 .@        
-    # )%m%b%F{%(#.blue.blue)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]\n└─%B%(#.%F{blue}#.
-    # %F{blue}$)%b%F{reset} '
-    #     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-
-    ######################
-    # Single line prompts:
-    ######################
-		# One Line Colorless prompt:
-    # PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
-		#
-		# Minimal blue/white prompt:
-		PROMPT=$'%b%F{%(#.blue.blue)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]─%B%(#.%F{blue}#.%F{blue}$)%b%F{reset} '
-		RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-		#
-		# Minimal red/white prompt:
-    # PROMPT=$'%b%F{%(#.red.red)}[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.red.red)}]─%B%(#.%F{red}#.%F{red}$)%b%F{reset} '
-		# RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-
+   
     # enable syntax-highlighting
     if [ -f /home/placeDirectoryorUserNameHere/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
 	# ksharrays breaks the plugin. This is fixed now but let's disable it in the
