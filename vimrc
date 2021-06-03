@@ -409,11 +409,12 @@ if (has("autocmd") && !has("gui_running"))
 endif
 
 "Sonokai color config (the configuration options should be placed before `colorscheme sonokai` )
-# let g:sonokai_style = 'andromeda'
-# let g:sonokai_enable_italic = 0
-# let g:sonokai_disable_italic_comment = 1
-# let g:sonokai_transparent_background = 1
-# colorscheme sonokai
+" let g:sonokai_style = 'andromeda'
+" let g:sonokai_enable_italic = 0
+" let g:sonokai_disable_italic_comment = 1
+" let g:sonokai_transparent_background = 1
+" colorscheme sonokai
+
 colorscheme onedark
 
 " AIRLINE + GIT + NERDTREE PLUGIN SETTINGS
