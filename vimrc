@@ -422,9 +422,13 @@ colorscheme onedark
 " let g:airline_theme = 'sonokai'
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let g:NERDTreeGitStatusWithFlags = 1
+
 " open NERDTree automatically
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" close nerdtree when exiting the last files
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"
 " CTRL + E toggles NERDTree explorer
 map <C-e> :NERDTreeToggle<CR>
 " This below is for gitstatus nertree plugin, which I have currently disabled.
