@@ -136,7 +136,7 @@ bindkey "^R" history-incremental-search-backward
 
 # export path
 export PATH="$HOME/Apps:$PATH"
-export PATH="/home/$USER/Tools/bin:$PATH"
+export PATH="/home/$USER/Tools/bin:/home/$USER/.shellscripts:$PATH"
 export EDITOR="vi"
 
 ## EXPERIMENTAL
