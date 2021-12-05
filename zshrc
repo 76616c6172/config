@@ -125,7 +125,7 @@ autoload -U colors && colors
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias tr='tree -L 2 -C'
- alias ll='ls -la'
+alias ll='ls -la'
 alias gdb='gdb -q'
 alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
 
@@ -254,11 +254,34 @@ alias l='ls -'
 alias d='docker'
 
 # autopushd
+# DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+# if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+#   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+#   [[ -d $dirstack[1] ]] && cd $dirstack[1]
+# fi
+# # called everytime pwd is changed
+# chpwd() {
+#   print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+# }
+
+
+# autopushd
 DIRSTACKSIZE=10
+DIRSTACKFILE=~/.cache/zsh/dirstack
 setopt autopushd
+setopt pushdtohome
 setopt pushdignoredups
 setopt pushdsilent
 setopt pushdminus
+# load dirs into stack from given file.
+if [[ -f $DIRSTACKFILE && $#dirstack -eq 0 ]]; then
+    dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+    [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+fi
+# At last we add a function to store dirs stack on dir change.
+function chpwd () {
+    print -l $PWD ${(u)dirstack} > $DIRSTACKFILE
+}
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
