@@ -305,6 +305,19 @@ nmap <leader>2 :set paste<CR>i
 noremap <C-n> <C-d>
 noremap <C-p> <C-b>
 
+" Keep search centered when searching with /
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" moving text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
+nnoremap <leader>k :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+
 " read personal/private vim configuration (keep last to override)
 set rtp^=~/.vimpersonal
 set rtp^=~/.vimprivate
