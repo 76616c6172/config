@@ -266,28 +266,40 @@ alias d='docker'
 
 
 # autopushd
-DIRSTACKSIZE=10
-DIRSTACKFILE=~/.cache/zsh/dirstack
+#DIRSTACKSIZE=10
+#DIRSTACKFILE=~/.cache/zsh/dirstack
 setopt autopushd
 setopt pushdtohome
 setopt pushdignoredups
 setopt pushdsilent
 setopt pushdminus
+DIRSTACKSIZE=9
+DIRSTACKFILE=~/.zdirs
 # FIXME currently only saves the last directory on shell close
 # load dirs into stack from given file.
-if [[ -f $DIRSTACKFILE && $#dirstack -eq 0 ]]; then
-    dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-    [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
-fi
+ if [[ -f $DIRSTACKFILE && $#dirstack -eq 0 ]]; then
+     dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+     [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+ fi
 # At last we add a function to store dirs stack on dir change.
-function chpwd () {
-    print -l $PWD ${(u)dirstack} > $DIRSTACKFILE
+ function chpwd () {
+     print -l $PWD ${(u)dirstack} > $DIRSTACKFILE
 }
 
+
+# Alternate disrstack
+#DIRSTACKFILE=~/.cache/zsh/dirstack
+#if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  #dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+#fi
+#chpwd() {
+#  sort $DIRSTACKFILE | uniq > $DIRSTACKFILE
+#}
+#
 # enable auto-suggestions based on the history
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    # change suggestion color
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
-fi
+#if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+#    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#    # change suggestion color
+#    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
+#fi
 
