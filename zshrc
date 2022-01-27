@@ -121,14 +121,6 @@ autoload -U colors && colors
 #PS1="%B% %F{#5f00ff}%n@%M%f%F{#87ffaf}%}:%f%F{#5f5fff}%}%~%}%f%F{#87ffaf}%}$%b %f% "
 #PS1="%B%{%F{#87ffaf}%}%n@%M %f%{%F{#5f00ff}%}%~%}%f%b$ "
  
-# show colors for ls
-alias ls='ls --color=auto'
-alias l='ls --color=auto'
-alias tr='tree -L 2 -C'
-alias ll='ls -la'
-alias gdb='gdb -q'
-alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
-
 # vim mode!
 set -o vi
 # reverse porting CTRL+R shell search from emacs bindings because I like it!
@@ -138,6 +130,7 @@ bindkey "^R" history-incremental-search-backward
 export PATH="$HOME/Apps:$PATH"
 export PATH="/home/$USER/Tools/bin:/home/$USER/.shellscripts:$PATH"
 export EDITOR="vi"
+export VULTR_API_KEY="VO4BFNIFURW66JCRV7DYCRO72ZXOBP5WGYAQ"
 
 ## EXPERIMENTAL
 #setopt autocd              # change directory just by typing its name
@@ -189,10 +182,10 @@ esac
 
 # Prompt
 if [ "$USER" = valar ]; then
-	PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%B%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{white}§)%b%F{reset} '        
+	PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%B%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
 	RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 else
-	PROMPT=$'%n@%m%b%F{%(#.blue.blue)}「%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}」%B%(#.%F{white}§.%F{white}§)%b%F{reset} '   
+	PROMPT=$'%n@%m%b%F{%(#.blue.blue)}「%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}」%B%(#.%F{white}§.%F{green}§)%b%F{reset} '   
 	RPROMPT='%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 fi
    
@@ -247,11 +240,16 @@ if [ -x /usr/bin/dircolors ]; then
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fi
 
-# some more ls aliases
-alias ll='ls -l'
+# Aliases
+alias ls='ls --color=auto'
+alias l='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias tr='tree -L 3 -C'
+alias gdb='gdb -q'
+alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
 alias la='ls -A'
-alias l='ls -'
 alias d='docker'
+
 
 # autopushd
 # DIRSTACKFILE="$HOME/.cache/zsh/dirs"
@@ -296,6 +294,7 @@ DIRSTACKFILE=~/.zdirs
 #  sort $DIRSTACKFILE | uniq > $DIRSTACKFILE
 #}
 #
+#
 # enable auto-suggestions based on the history
 #if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
 #    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -303,3 +302,5 @@ DIRSTACKFILE=~/.zdirs
 #    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 #fi
 
+# Haskell environment
+[ -f "/home/valar/.ghcup/env" ] && source "/home/valar/.ghcup/env" # ghcup-env
