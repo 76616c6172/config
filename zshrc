@@ -130,7 +130,6 @@ bindkey "^R" history-incremental-search-backward
 export PATH="$HOME/Apps:$PATH"
 export PATH="/home/$USER/Tools/bin:/home/$USER/.shellscripts:$PATH"
 export EDITOR="vi"
-export VULTR_API_KEY="VO4BFNIFURW66JCRV7DYCRO72ZXOBP5WGYAQ"
 
 ## EXPERIMENTAL
 #setopt autocd              # change directory just by typing its name
