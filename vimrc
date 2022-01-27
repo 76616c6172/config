@@ -26,10 +26,19 @@ set autoindent
 " set autowrite
 
 " set numbers on
-" set number
+"set number
+"
+" turn numbers off
+"set nonumber
+"
+"disable relative line numbers
+"set norelativenumber
 
-"turn numbers off
-set nonumber
+" REMINDER : F1 toggles numbers
+" set both line nums and relative nums
+set number
+set relativenumber
+
 
 "
 "turn col and row position on in the bottom right
@@ -65,8 +74,6 @@ set expandtab
 "...max text width, twice the old 80 standard, we have big screens yo.
 set textwidth =160
 
-"disable relative line numbers
-set norelativenumber
 
 "more risky but cleaner
 set nobackup
