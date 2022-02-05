@@ -181,13 +181,13 @@ esac
 
 # Prompt
 if [ "$USER" = valar ]; then
-	PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%B%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
+	PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
 	RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 else
 	PROMPT=$'%n@%m%b%F{%(#.blue.blue)}「%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}」%B%(#.%F{white}§.%F{green}§)%b%F{reset} '   
 	RPROMPT='%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 fi
-   
+
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
