@@ -36,8 +36,8 @@ set autoindent
 
 " REMINDER : F1 toggles numbers
 " set both line nums and relative nums
-set number
-set relativenumber
+"set number
+"set relativenumber
 
 
 "
@@ -161,6 +161,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vimplugins')
   "Plug 'sainnhe/sonokai'
   Plug 'joshdick/onedark.vim'
+  "Plug 'rakr/vim-one'
   Plug 'preservim/nerdtree'
   Plug 'z0mbix/vim-shfmt'
   Plug 'sheerun/vim-polyglot'
@@ -326,9 +327,9 @@ nnoremap <leader>k :m .-2<CR>==
 nnoremap <leader>j :m .+1<CR>==
 
 " read personal/private vim configuration (keep last to override)
-set rtp^=~/.vimpersonal
-set rtp^=~/.vimprivate
-set rtp^=~/.vimwork
+"set rtp^=~/.vimpersonal
+"set rtp^=~/.vimprivate
+"set rtp^=~/.vimwork
 
 hi StatusLineNC term=bold cterm=bold gui=bold
 hi StatusLine term=bold cterm=bold gui=bold
@@ -436,6 +437,8 @@ endif
 " colorscheme sonokai
 
 colorscheme onedark
+" colorscheme one
+
 
 " AIRLINE + GIT + NERDTREE PLUGIN SETTINGS
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
