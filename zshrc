@@ -181,11 +181,15 @@ esac
 
 # Prompt
 if [ "$USER" = valar ]; then
-	PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
+	# PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
+  # #.white.white)
+   PROMPT=$'%F{%(#.white.white)}┌──%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─§%B%(#.%F{red}#.%F)%B%F{reset} '
+     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+
 	RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 else
-	PROMPT=$'%n@%m%b%F{%(#.blue.blue)}「%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}」%B%(#.%F{white}§.%F{green}§)%b%F{reset} '   
-	RPROMPT='%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+  PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
+     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 fi
 
 unset color_prompt force_color_prompt
@@ -200,7 +204,8 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-new_line_before_prompt='no'
+# new_line_before_prompt='no'
+new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
     print -Pn "$TERM_TITLE"
