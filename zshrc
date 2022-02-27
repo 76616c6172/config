@@ -183,10 +183,28 @@ esac
 if [ "$USER" = valar ]; then
 	# PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
   # #.white.white)
-   PROMPT=$'%F{%(#.white.white)}┌──%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─§%B%(#.%F{red}#.%F)%B%F{reset} '
-     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
-	RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+#    PROMPT=$'%F{%(#.white.white)}┌──%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
+#      RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+
+
+    #PROMPT=$'%F{%(#.white.white)}████╗\n██╔═╝%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n╚═╝%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
+      #RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+      
+# ═
+# ╔═
+# ╗
+# ╝
+#
+# ╔═══╗
+# ║ ╔═╝
+# ╚═╝
+# ╔═╗
+# ║ ║
+# ╚═╝
+    PROMPT=$'%F{%(#.white.white)}╔═╗\n╚═╝%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
+      RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+
 else
   PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
      RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
@@ -204,8 +222,8 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-# new_line_before_prompt='no'
-new_line_before_prompt='yes'
+new_line_before_prompt='no'
+# new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
     print -Pn "$TERM_TITLE"
@@ -245,7 +263,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Aliases
-alias ls='ls --color=auto'
+alias ls='ls -l --color=auto'
 alias l='ls --color=auto'
 alias ll='ls -l --color=auto'
 alias tr='tree -L 3 -C'
@@ -253,6 +271,8 @@ alias gdb='gdb -q'
 alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
 alias la='ls -A'
 alias d='docker'
+alias wf='nmcli d wifi connect'
+alias nms='nmcli d status'
 
 
 # autopushd
