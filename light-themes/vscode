@@ -1,0 +1,135 @@
+{ "keyboard.dispatch": "keyCode",
+	"update.mode": "manual",
+	"extensions.autoUpdate": false,
+	"extensions.autoCheckUpdates": false,
+	"terminal.external.linuxExec": "alacritty",
+	"telemetry.enableTelemetry": false,
+	"telemetry.enableCrashReporter": false,
+	"workbench.settings.enableNaturalLanguageSearch": false,
+	"window.menuBarVisibility": "hidden",
+	"workbench.startupEditor": "newUntitledFile",
+	"editor.lineNumbers": "relative",
+	"extensions.ignoreRecommendations": true,
+	"vim.vimrc.enable": true,
+	"workbench.statusBar.visible": true,
+	"explorer.decorations.badges": false,
+	"vim.visualModeKeyBindings": [
+    {
+        "before": ["J"],
+        "commands": ["editor.action.moveLinesDownAction"]
+    }, // moveLineDown
+    {
+        "before": ["K"],
+        "commands": ["editor.action.moveLinesUpAction"]
+		} //move lines up
+ 	],
+//	"vim.normalModeKeyBindingsNonRecursive": [
+//    {
+//        "before": ["J"],
+//        "commands": ["editor.action.moveLinesDownAction"]
+//    }, // moveLineDown
+//    {
+//        "before": ["K"],
+//        "commands": ["editor.action.moveLinesUpAction"]
+//    } // moveLineUp
+//],
+	/*
+	"workbench.colorCustomizations": {
+	"list.inactiveSelectionBackground": "#C5DEF0",
+	"sideBar.foreground": "#000000",
+	"editor.background": "#1c1c1c",
+	"sideBar.background": "#000000",
+	"activityBar.activeBorder": "#000000",
+	"sideBarSectionHeader.background": "#CAC9C9",
+	"sideBarSectionHeader.foreground": "#000000",
+	//"editorLineNumber.foreground": "#ffff03"
+	},
+	*/
+	"editor.scrollbar.horizontal": "hidden",
+	"editor.scrollbar.vertical": "hidden",
+	"editor.hideCursorInOverviewRuler": true,
+	"editor.cursorSmoothCaretAnimation": false,
+	"editor.minimap.renderCharacters": false,
+	"editor.minimap.showSlider": "always",
+	"editor.minimap.maxColumn": 200,
+	"editor.renderWhitespace":"none",
+	"explorer.openEditors.visible": 0,
+	"workbench.editor.enablePreviewFromQuickOpen": false,
+	"editor.insertSpaces": false,
+	"editor.tabSize": 2,
+	"editor.wordWrapColumn": 120,
+	"editor.wordWrap":"wordWrapColumn",
+	"editor.formatOnPaste": false,
+	"editor.cursorBlinking": "phase",
+	"editor.tabCompletion": "on",
+	"editor.cursorSurroundingLines": 0,
+	"terminal.integrated.fontSize": 14,
+	"markdown.preview.fontSize": 14,
+	"debug.console.fontSize": 14,
+	"workbench.activityBar.visible": false,
+	"workbench.tips.enabled": false,
+	"workbench.tree.indent": 4,
+	//"workbench.iconTheme": ,
+	"editor.glyphMargin": false,
+	"workbench.editor.pinnedTabSizing": "shrink",
+	"workbench.editor.showIcons": true,
+	"workbench.editor.tabSizing": "shrink",
+	"zenMode.hideLineNumbers": false,
+	"breadcrumbs.enabled": true,
+	"git.path": "",
+	"editor.fontFamily": "'mononoki', 'Droid Sans Mono', monospace, 'Droid Sans Fallback'",
+	"editor.fontSize": 15,
+	"files.exclude": {
+		".*": true
+		},
+	"go.buildOnSave": "off",
+	"go.useLanguageServer": true,
+	"go.languageServerExperimentalFeatures": {
+		"format": true,
+		"diagnostics": true,
+		"documentLink": true,
+	},
+	"[go]": {
+		"editor.codeActionsOnSave": {
+			"editor.formatOnSave": false,
+			"source.organizeImports": true,
+		},
+	},
+		"launch": {
+		"configurations": [],
+		"compounds": []
+		},
+	"explorer.confirmDragAndDrop": false,
+	"go.toolsManagement.checkForUpdates": "off",
+	"go.vetOnSave": "off",
+
+	"gopls": {
+//		"build.memoryMode": "DegradeClosed"
+//		"ui.completion.completionBudget": "100ms"
+	//	"ui.completion.experimentalPostfixCompletions": true
+			//"complete.Unimported": true,
+			"deepCompletion": true,
+		},
+		"go.lintOnSave": "file",
+		//"latex.server.autoDownload": true,
+		//"latex-workshop.message.update.show": false,
+		"go.toolsManagement.autoUpdate": true,
+		"workbench.editor.untitled.hint": "hidden",
+		"go.editorContextMenuCommands": {
+			"toggleTestFile": false,
+			"addTags": false,
+			"testAtCursor": false,
+			"generateTestForFunction": false,
+			"addImport": false,
+			"testCoverage": false,
+			"playground": false,
+			"debugTestAtCursor": false
+		},
+		"go.survey.prompt": false,
+		"haskell.plugin.hlint.codeActionsOn": false,
+		"workbench.colorTheme": "Horizon Bright",
+		"workbench.iconTheme": "eq-material-theme-icons-darker",
+		"editor.minimap.enabled": false,
+		//"haskell.formattingProvider": "none"
+		
+}

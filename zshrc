@@ -104,7 +104,7 @@ autoload -Uz run-help
 # advanced completion
 autoload -Uz compinit
 compinit
- 
+
 # arrow-key driven interface for autocomplete menu
 #zstyle ':completion:*' menu select
  
@@ -179,6 +179,12 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\*\(.*\)/·\1/p'
+}
+#COLOR_GIT=$'\u001b[31m'
+setopt PROMPT_SUBST
+
 # Prompt
 if [ "$USER" = valar ]; then
 	# PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
@@ -202,7 +208,15 @@ if [ "$USER" = valar ]; then
 # ╔═╗
 # ║ ║
 # ╚═╝
-    PROMPT=$'%F{%(#.white.white)}╔═╗\n╚═╝%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
+#
+#
+#
+#
+
+
+PROMPT='${COLOR_USR}%n ${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} '
+
+    PROMPT=$'%F{%(#.white.white)}╔═╗\n╚═╝%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
       RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
