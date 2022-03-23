@@ -1,63 +1,115 @@
 #!/bin/sh
 
-# exit if the script is not being called from the dir it is in.
-# check if ~/.config already exists, if it does, print error and exit.
-check_dir() {
-	if test ! -e "$PWD/setup"; then
-    echo "[!][error] Installer must be called from the directory it is in! Exiting without changes."
-		exit 1
-  elif test -d "$HOME/.configuration"; then
-    echo "[!][error] A directory named .configuration already exists in the home directory! Exiting without changes."
-    exit
-  elif test -f "$HOME/.configuration"; then
-    echo "[!][error] There is already a file named .configuration in the home directory! Exiting without changes."
-    exit
+# Configure/install bash and vim 
+minimal() {
+
+  if ! command -v bash 2> /dev/null ; then
+    echo -e "\033[32;1;4m[*] installing bash\033[0m" 
+    apt install bash -y
   fi
-}
+  if ! command -v vim 2> /dev/null ; then
+    echo -e "\033[32;1;4m[*] installing vim\033[0m" 
+    apt install vim-nox -y
+  fi
 
-# makes backups and creates symlinks for .bashrc .vimrc and .tmux.conf in hidden .config folder
-simple() {
-  echo "[*] Creating backups.."
-  echo "[backing up] ~/.zshrc.bak"
-  cp "$HOME/.zshrc" "$HOME/.zshrc.bak"
-  echo "[backing up] ~/.bashrc.bak"
-  cp "$HOME/.bashrc" "$HOME/.bashrc.bak"
-  echo "[backing up] ~/.tmux.conf.bak"
-  cp "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
-  echo "[backing up] ~/.vimrc.bak"
-  cp "$HOME/.vimrc" "$HOME/.vimrc.bak"
-  echo "[backing up] ~/.vimrc.bak"
-  cp "$HOME/.vimrc" "$HOME/.vimrc.bak"
+  if test -f "$HOME/.bashrc"; then
+    echo "[*] creating backup folder.."
+    echo -e "\033[32;1;4m[*] creating backup folder..\033[0m" 
+    mkdir "$HOME/.configuration/backup"
+    echo "[bashrc] mv .bashrc backup/bashrc.bak"
+    mv "$HOME/.bashrc" "$HOME/.configuration/backup/bashrc.bak"
+  fi
+  if test -f "$HOME/.vimrc"; then
+    echo "[vimrc] mv .vimrc backup/vimrc.bak"
+    mv "$HOME/.vimrc" "$HOME/.configuration/backup/vimrc.bak"
+  fi
 
-  # Moving backups to keep everything tidy
-  echo "[*] Moving backups into config/backup"
-  mkdir "$PWD/backup"
-  for f in .zshrc .bashrc .vimrc .tmux.conf; do
-    mv "$HOME/$f.bak" "$PWD/backup"
-  done
-
-  # Hiding the config folder
-  echo "[*] Moving config to .configuration"
-  mv "$PWD" "$HOME/.configuration"
-
-  # Symlinking to apply the new config files
-  echo "[*] Creating Symlinks.."
-  # zshrc
-  echo "[symlinked] .zshrc -> .configuration/zshrc"
-  ln -sf "$HOME/.configuration/zshrc" "$HOME/.zshrc"
-  # bashrc
-  echo "[symlinked] .bashrc -> .configuration/bashrc"
+  curl https://raw.githubusercontent.com/76616c6172/config/master/bashrc -o "$HOME/.configuration/bashrc"
+  echo "[linking bashrc] .bashrc -> .configuration/bashrc"
   ln -sf "$HOME/.configuration/bashrc" "$HOME/.bashrc"
-  # tmux.conf
-  echo "[symlinked] .tmux.conf -> .configuration/tmux.conf"
-  ln -sf "$HOME/.configuration/tmux.conf" "$HOME/.tmux.conf"
-  # vimrc
-  echo "[symlinked] .vimrc -> .configuration/vimrc"
+  curl https://raw.githubusercontent.com/76616c6172/config/master/vimrc -o "$HOME/.configuration/vimrc"
+  echo "[linking vimrc] .vimrc -> .configuration/vimrc"
   ln -sf "$HOME/.configuration/vimrc" "$HOME/.vimrc"
 }
 
+# call minimal and add tmux
+basic() {
+
+	# install bash an vim
+  minimal
+
+  if test -f "$HOME/.tmux.conf"; then
+    echo "[tmux.conf] mv .tmux.conf backup/tmux.conf.bak"
+   mv  "$HOME/.tmux.conf" "$HOME/.configuration/backup/tmux.conf.bak"
+  fi
+
+  if ! command -v tmux 2> /dev/null ; then
+    echo -e "\033[32;1;4m[*] installing tmux\033[0m" 
+    apt install tmux -y
+  fi
+
+  curl https://raw.githubusercontent.com/76616c6172/config/master/tmux.conf -o "$HOME/.configuration/tmux.conf"
+  echo "[linking tmux.conf] .tmux.conf -> .configuration/tmux.conf"
+  ln -sf "$HOME/.configuration/tmux.conf" "$HOME/.tmux.conf"
+
+}
+
+# call minimal and basic and add zsh + git
+full() {
+
+  minimal
+  basic
+
+  if ! command -v zsh 2> /dev/null ; then
+    echo -e "\033[32;1;4m[*] installing zsh\033[0m" 
+    apt install zsh -y
+  fi
+  if ! command -v git 2> /dev/null ; then
+    echo -e "\033[32;1;4m[*] installing git\033[0m" 
+  	apt install git -y
+  fi
+
+  if test -f "$HOME/.zshrc"; then
+    echo "[zshrc] mv .zshrc backup/zshrc"
+     mv "$HOME/.zshrc" "$HOME/.configuration/backup/zshrc.bak"
+  fi
+
+  curl https://raw.githubusercontent.com/76616c6172/config/master/zshrc -o "$HOME/.configuration/zshrc"
+  echo "[linking zshrc] .zshrc -> .configuration/zshrc"
+  ln -sf "$HOME/.configuration/zshrc" "$HOME/.zshrc"
+}
+
+choose_option() {
+  echo "[*] CHOOSE OPTION:"
+  echo "0: MINIMAL  bash + vim"
+  echo "1: BASIC    bash + vim + tmux"
+  echo "2: FULL     zsh  + vim + tmux + git"
+  read -r x
+}
+
+check_option() {
+  if test "$x" -eq "0" ; then
+  minimal
+  chsh -s /bin/bash
+  return 0
+  fi
+  if test "$x" -eq "1" ; then
+  basic
+  chsh -s /bin/bash
+  return 0
+  elif test "$x" -eq "2" ; then
+  full
+  chsh -s /bin/zsh
+  return 0
+  fi
+    echo -e "\033[31;1;4m[!][error] selection must be 0, 1, or 2. Exiting without changes\033[0m" 
+  exit 1
+}
+
 # execution starts here
-check_dir
-simple
-echo "[*] Simple configuration complete!"
-exit
+mkdir "$HOME/.configuration"
+choose_option
+check_option
+#simple
+echo "[*] configuration complete!"
+exit 0
