@@ -88,7 +88,7 @@ if [ "$color_prompt" = yes ]; then
     fi
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}${VIRTUAL_ENV:+(\[\033[0;1m\]$(basename $VIRTUAL_ENV)'$prompt_color')}('$info_color'\u${prompt_symbol}\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']\n'$prompt_color'└─'$info_color'\$\[\033[0m\] ';;
+            PS1=$prompt_color'╔═╗('$info_color'\u${prompt_symbol}\h'$prompt_color')\n╚═╝${debian_chroot:+($debian_chroot)──}${VIRTUAL_ENV:+(\[\033[0;1m\]$(basename $VIRTUAL_ENV)'$prompt_color')}「\[\033[0;1m\w'$prompt_color' 」\n'$prompt_color$info_color'§\[\033[0m\] ';;
         oneline)
             PS1='${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV)) }${debian_chroot:+($debian_chroot)}'$info_color'\u@\h\[\033[00m\]:'$prompt_color'\[\033[01m\]\w\[\033[00m\]\$ ';;
         backtrack)
@@ -135,15 +135,16 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # global aliases here
+alias ls='ls -l --color=auto'
+alias l='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias tr='tree -L 3 -C'
+alias gdb='gdb -q'
+alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
+alias la='ls -A'
 alias d='docker'
-alias ll='ls -l'
-alias ls='ls --color=auto'
-alias l='ls'
-alias ls='ls --color=auto'
-alias tr='tree -C -L 2'
-alias tmux='tmux -2'
-#alias cd='cd $1; ls'
-#alias c='clear'
+alias wf='nmcli d wifi connect'
+alias nms='nmcli d status'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -208,5 +209,5 @@ bind -m vi-insert 'Control-l: clear-screen'
 complete -cf sudo
 
 export EDITOR='vi'
-export PATH="/home/valar/.scripts:$PATH"
+export PATH="$PATH:/home/valar/.scripts"
 
