@@ -214,13 +214,13 @@ if [ "$USER" = valar ]; then
 #
 
 
-PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n%F{reset}╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
 RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
 #PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
 #RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」%F{%(#.white.white)}as %B%F{%(#.red.white)}%n@%m%b%F{%(#.blue.white)} $(parse_git_branch)\n%F{reset}╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」%F{%(#.white.white)}as %B%F{%(#.red.white)}%n@%m%b%F{%(#.blue.white)} $(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
 
 RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 fi
