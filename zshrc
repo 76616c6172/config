@@ -310,28 +310,31 @@ setopt pushdignoredups
 setopt pushdsilent
 setopt pushdminus
 DIRSTACKSIZE=9
-DIRSTACKFILE=~/.zdirs
+
 # FIXME currently only saves the last directory on shell close
+# DIRSTACKFILE=~/.zdirs
 # load dirs into stack from given file.
- if [[ -f $DIRSTACKFILE && $#dirstack -eq 0 ]]; then
-     dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-     [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
- fi
-# At last we add a function to store dirs stack on dir change.
- function chpwd () {
-     print -l $PWD ${(u)dirstack} > $DIRSTACKFILE
+# if [[ -f $DIRSTACKFILE && $#dirstack -eq 0 ]]; then
+#     dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+#     [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+# fi
+## At last we add a function to store dirs stack on dir change.
+# function chpwd () {
+#     print -l $PWD ${(u)dirstack} > $DIRSTACKFILE
+#}
+
+# Alternate dirstack
+DIRSTACKFILE=~/.cache/zsh/dirstack
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+ dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+    [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+fi
+chpwd() {
+  sort $DIRSTACKFILE | uniq > $DIRSTACKFILE
+  print -l $PWD ${(u)dirstack} >> $DIRSTACKFILE
 }
 
 
-# Alternate disrstack
-#DIRSTACKFILE=~/.cache/zsh/dirstack
-#if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-  #dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-#fi
-#chpwd() {
-#  sort $DIRSTACKFILE | uniq > $DIRSTACKFILE
-#}
-#
 #
 # enable auto-suggestions based on the history
 #if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
