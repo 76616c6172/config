@@ -180,7 +180,7 @@ case "$TERM" in
 esac
 
 function parse_git_branch() {
-    git branch 2> /dev/null | sed -n -e 's/^\*\(.*\)/·\1/p'
+    git branch 2> /dev/null | sed -n -e 's/^\*\(.*\)/on\1/p'
 }
 #COLOR_GIT=$'\u001b[31m'
 setopt PROMPT_SUBST
@@ -214,14 +214,15 @@ if [ "$USER" = valar ]; then
 #
 
 
-PROMPT='${COLOR_USR}%n ${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} '
-
-    PROMPT=$'%F{%(#.white.white)}╔═╗\n╚═╝%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
-      RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n%F{reset}╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
-  PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
-     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+#PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
+#RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」%F{%(#.white.white)}as %B%F{%(#.red.white)}%n@%m%b%F{%(#.blue.white)} $(parse_git_branch)\n%F{reset}╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+
+RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 fi
 
 unset color_prompt force_color_prompt
@@ -236,7 +237,7 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-new_line_before_prompt='no'
+new_line_before_prompt='yes'
 # new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
@@ -277,7 +278,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Aliases
-alias ls='ls -l --color=auto'
+#alias ls='ls -l --color=auto'
+alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias ll='ls -l --color=auto'
 alias tr='tree -L 3 -C'
