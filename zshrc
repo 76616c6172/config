@@ -289,7 +289,7 @@ alias la='ls -A'
 alias d='docker'
 alias wf='nmcli d wifi connect'
 alias nms='nmcli d status'
-
+alias p='python'
 
 # autopushd
 # DIRSTACKFILE="$HOME/.cache/zsh/dirs"
