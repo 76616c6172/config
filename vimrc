@@ -296,18 +296,8 @@ map <F12> :set fdm=indent<CR>
 
 nmap <leader>2 :set paste<CR>i
 
-" disable arrow keys (vi muscle memory)
-"noremap <up> :echoerr "Umm, use k instead"<CR>
-"noremap <down> :echoerr "Umm, use j instead"<CR>
-"noremap <left> :echoerr "Umm, use h instead"<CR>
-" inoremap <right> :echoerr "Umm, use l instead"<CR>
-" inoremap <up> <NOP>
-" inoremap <down> <NOP>
-" inoremap <left> <NOP>
-" inoremap <right> <NOP>
-"
-" Clear search highlighting by pressing enter
-nnoremap <esc> :noh<return><esc>
+" Clear search highlighting by pressing space
+nnoremap <silent> <space> :nohlsearch<Bar>:echo<CR>
 
 " Better page down and page up
 noremap <C-n> <C-d>
