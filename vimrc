@@ -45,7 +45,7 @@ set autoindent
 "set ruler
 
 " show command and insert mode
-" set noshowmode
+"set noshowmode
 set showmode
 
 " spaces and tabs etc
@@ -103,10 +103,6 @@ set noshowmatch
 let g:polyglot_disabled = ['markdown']
 
 " Just the defaults, these are changed per filetype by plugins.
-" " Most of the utility of all of this has been superceded by the use of
-" " modern simplified pandoc for capturing knowledge source instead of
-" " arbitrary raw text files.
-
 set formatoptions-=t   " don't auto-wrap text using text width
 set formatoptions+=c   " autowrap comments using textwidth with leader
 set formatoptions-=r   " don't auto-insert comment leader on enter in insert
@@ -159,18 +155,19 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
   " load all the plugins
   call plug#begin('~/.vimplugins')
-  "Plug 'sainnhe/sonokai'
-  Plug 'joshdick/onedark.vim'
-  "Plug 'rakr/vim-one'
-  Plug 'preservim/nerdtree'
-  Plug 'z0mbix/vim-shfmt'
   Plug 'sheerun/vim-polyglot'
+  Plug 'ntk148v/vim-horizon'
+  "Plug 'sainnhe/sonokai'
+  "Plug 'joshdick/onedark.vim'
+  "Plug 'rakr/vim-one'
+  "Plug 'preservim/nerdtree'
+  Plug 'z0mbix/vim-shfmt'
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'rwxrob/vim-pandoc-syntax-simple'
   Plug 'cespare/vim-toml'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'PProvost/vim-ps1'
-  Plug 'roxma/vim-tmux-clipboard'
+  "Plug 'roxma/vim-tmux-clipboard'
   "Plug 'pangloss/vim-javascript'
   "Plug 'tpope/vim-fugitive'
   " Plug 'morhetz/gruvbox'
@@ -258,7 +255,7 @@ map Y y$
 " better command-line completionset wildmenu
 
 " disable search highlighting with <C-L> when refreshing screen
-nnoremap <C-L> :nohl<CR><C-L>
+" nnoremap <C-L> :nohl<CR><C-L>
 
 " enable omni-completion
 set omnifunc=syntaxcomplete#Complete
@@ -308,6 +305,9 @@ nmap <leader>2 :set paste<CR>i
 " inoremap <down> <NOP>
 " inoremap <left> <NOP>
 " inoremap <right> <NOP>
+"
+" Clear search highlighting by pressing enter
+nnoremap <esc> :noh<return><esc>
 
 " Better page down and page up
 noremap <C-n> <C-d>
@@ -356,7 +356,7 @@ set expandtab
 set hlsearch
 set noswapfile
 set numberwidth=1
-set nohlsearch 
+"set nohlsearch  " no search hightlighting
 highlight Comment ctermfg=green
 set ignorecase
 "set hlsearch
@@ -421,13 +421,14 @@ let g:python_slow_sync														= 1
 " `gui` is the hex color code used in GUI mode/nvim true-color mode
 " `cterm` is the color code used in 256-color mode
 " `cterm16` is the color code used in 16-color mode
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
-  augroup END
-endif
+"
+"if (has("autocmd") && !has("gui_running"))
+"  augroup colorset
+"    autocmd!
+"    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+"    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+"  augroup END
+"endif
 
 "Sonokai color config (the configuration options should be placed before `colorscheme sonokai` )
 " let g:sonokai_style = 'andromeda'
@@ -436,24 +437,25 @@ endif
 " let g:sonokai_transparent_background = 1
 " colorscheme sonokai
 
-colorscheme onedark
+colorscheme horizon
+" colorscheme onedark
 " colorscheme one
 
 
 " AIRLINE + GIT + NERDTREE PLUGIN SETTINGS
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " let g:airline_theme = 'sonokai'
-let g:NERDTreeGitStatusUseNerdFonts = 1
-let g:NERDTreeGitStatusWithFlags = 1
+"let g:NERDTreeGitStatusUseNerdFonts = 1
+"let g:NERDTreeGitStatusWithFlags = 1
 
 " open NERDTree automatically
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " close nerdtree when exiting the last files
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "
 " CTRL + E toggles NERDTree explorer
-map <C-e> :NERDTreeToggle<CR>
+"map <C-e> :NERDTreeToggle<CR>
 " This below is for gitstatus nertree plugin, which I have currently disabled.
 "let g:NERDTreeGitStatusIndicatorMapCustom = {
 "\ 'modified' :'✹',
