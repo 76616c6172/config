@@ -297,7 +297,9 @@ map <F12> :set fdm=indent<CR>
 nmap <leader>2 :set paste<CR>i
 
 " Clear search highlighting by pressing space
-nnoremap <silent> <space> :nohlsearch<Bar>:echo<CR>
+"nnoremap <silent> <space> :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> <space> :nohlsearch<CR><CR>
+
 
 " Better page down and page up
 noremap <C-n> <C-d>
@@ -427,7 +429,7 @@ let g:python_slow_sync														= 1
 " let g:sonokai_transparent_background = 1
 " colorscheme sonokai
 
-colorscheme horizon
+" colorscheme horizon
 " colorscheme onedark
 " colorscheme one
 
