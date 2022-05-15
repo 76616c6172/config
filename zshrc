@@ -237,7 +237,7 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-new_line_before_prompt='yes'
+new_line_before_prompt=''
 # new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
@@ -248,7 +248,8 @@ precmd() {
 	if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
 	    _NEW_LINE_BEFORE_PROMPT=1
 	else
-	    print ""
+      # this is the line that is printed after each prompt, by default it's a newline
+	    print "║"
 	fi
     fi
 }
@@ -278,7 +279,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Aliases
-#alias ls='ls -l --color=auto'
+# alias ls='ls -l --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias ll='ls -l --color=auto'
@@ -288,8 +289,8 @@ alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
 alias la='ls -A'
 alias d='docker'
 alias wf='nmcli d wifi connect'
-alias nms='nmcli d status'
 alias p='python'
+# alias code='dbus-launch code' # no longer needed
 
 # autopushd
 # DIRSTACKFILE="$HOME/.cache/zsh/dirs"
