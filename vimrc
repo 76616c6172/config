@@ -7,13 +7,13 @@
 " It is recommended to make changes after sourcing debian.vim since it alters
 " the value of the 'compatible' option.
 "
-" Enable true color 
+" Enable true color
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
- 
+
 " runtime! debian.vim
 " pure vi ignoring other configurations
 let skip_defaults_vim=1
@@ -36,7 +36,7 @@ set autoindent
 
 " REMINDER : F1 toggles numbers
 " set both line nums and relative nums
-"set number
+set number
 "set relativenumber
 
 
@@ -143,7 +143,6 @@ filetype plugin on
 set ttyfast
 
 " Install vim-plug if not already installed
-" (Yes I know about Vim 8 Plugins. They suck.)
 if v:version >= 800 && executable('curl') && empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -429,7 +428,7 @@ let g:python_slow_sync														= 1
 " let g:sonokai_transparent_background = 1
 " colorscheme sonokai
 
-" colorscheme horizon
+colorscheme horizon
 " colorscheme onedark
 " colorscheme one
 

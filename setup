@@ -7,6 +7,12 @@ minimal() {
     echo -e "\033[32;1;4m[*] installing bash\033[0m" 
     apt install bash -y
   fi
+
+  if ! command -v git 2> /dev/null ; then
+    echo -e "\033[32;1;4m[*] installing git\033[0m" 
+    apt install git -y
+  fi
+
   if ! command -v vim 2> /dev/null ; then
     echo -e "\033[32;1;4m[*] installing vim\033[0m" 
     apt install vim-nox -y
@@ -107,6 +113,7 @@ check_option() {
 }
 
 # execution starts here
+sudo apt update
 mkdir "$HOME/.configuration"
 choose_option
 check_option
