@@ -46,23 +46,23 @@ typeset -ga debian_missing_features
         done
     }
  
-    bind2maps emacs             -- BackSpace   backward-delete-char
-    bind2maps       viins       -- BackSpace   vi-backward-delete-char
-    bind2maps             vicmd -- BackSpace   vi-backward-char
-    bind2maps emacs             -- Home        beginning-of-line
-    bind2maps       viins vicmd -- Home        vi-beginning-of-line
-    bind2maps emacs             -- End         end-of-line
-    bind2maps       viins vicmd -- End         vi-end-of-line
-    bind2maps emacs viins       -- Insert      overwrite-mode
-    bind2maps             vicmd -- Insert      vi-insert
-    bind2maps emacs             -- Delete      delete-char
-    bind2maps       viins vicmd -- Delete      vi-delete-char
-    bind2maps emacs viins vicmd -- Up          up-line-or-history
-    bind2maps emacs viins vicmd -- Down        down-line-or-history
-    bind2maps emacs             -- Left        backward-char
-    bind2maps       viins vicmd -- Left        vi-backward-char
-    bind2maps emacs             -- Right       forward-char
-    bind2maps       viins vicmd -- Right       vi-forward-char
+    # bind2maps emacs             -- BackSpace   backward-delete-char
+    # bind2maps       viins       -- BackSpace   vi-backward-delete-char
+    # bind2maps             vicmd -- BackSpace   vi-backward-char
+    # bind2maps emacs             -- Home        beginning-of-line
+    # bind2maps       viins vicmd -- Home        vi-beginning-of-line
+    # bind2maps emacs             -- End         end-of-line
+    # bind2maps       viins vicmd -- End         vi-end-of-line
+    # bind2maps emacs viins       -- Insert      overwrite-mode
+    # bind2maps             vicmd -- Insert      vi-insert
+    # bind2maps emacs             -- Delete      delete-char
+    # bind2maps       viins vicmd -- Delete      vi-delete-char
+    # bind2maps emacs viins vicmd -- Up          up-line-or-history
+    # bind2maps emacs viins vicmd -- Down        down-line-or-history
+    # bind2maps emacs             -- Left        backward-char
+    # bind2maps       viins vicmd -- Left        vi-backward-char
+    # bind2maps emacs             -- Right       forward-char
+    # bind2maps       viins vicmd -- Right       vi-forward-char
  
     # Make sure the terminal is in application mode, when zle is
     # active. Only then are the values from $terminfo valid.
@@ -129,6 +129,7 @@ bindkey "^R" history-incremental-search-backward
 # export path
 export PATH="$HOME/Apps:$PATH"
 export PATH="/home/$USER/Tools/bin:/home/$USER/.shellscripts:$PATH"
+export PATH="$PATH:$(go env GOPATH)/bin"
 export EDITOR="vi"
 
 ## EXPERIMENTAL
@@ -214,15 +215,20 @@ if [ "$USER" = valar ]; then
 #
 
 
-PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
-RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+#PROMPT=$'%F{%(#.white.white)}╔═ 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+#RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{green}§%(#.%F{red}#.%F)%B%F{reset} '
+RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
 #PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
 #RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-PROMPT=$'%F{%(#.white.white)}╔═ in 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」%F{%(#.white.white)}as %B%F{%(#.red.white)}%n@%m%b%F{%(#.blue.white)} $(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+#RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+#PROMPT=$'%F{%(#.white.white)}╔═ 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」%F{%(#.white.white)}as %B%F{%(#.red.white)}%n@%m%b%F{%(#.blue.white)} $(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
+#RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
-RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
+PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{green}§%(#.%F{red}#.%F)%B%F{reset} '
+RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 fi
 
 unset color_prompt force_color_prompt
@@ -237,8 +243,8 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-new_line_before_prompt=''
-# new_line_before_prompt='yes'
+#new_line_before_prompt=''
+new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
     print -Pn "$TERM_TITLE"
@@ -249,7 +255,7 @@ precmd() {
 	    _NEW_LINE_BEFORE_PROMPT=1
 	else
       # this is the line that is printed after each prompt, by default it's a newline
-	    print "║"
+	    print ""
 	fi
     fi
 }
@@ -288,8 +294,10 @@ alias gdb='gdb -q'
 alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
 alias la='ls -A'
 alias d='docker'
+alias t='terraform'
+alias p='python3'
 alias wf='nmcli d wifi connect'
-alias p='python'
+alias g='git'
 # alias code='dbus-launch code' # no longer needed
 
 # autopushd
@@ -348,3 +356,6 @@ chpwd() {
 
 # Haskell environment
 [ -f "/home/valar/.ghcup/env" ] && source "/home/valar/.ghcup/env" # ghcup-env
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
