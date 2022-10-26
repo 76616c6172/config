@@ -211,3 +211,10 @@ complete -cf sudo
 export EDITOR='vi'
 export PATH="$PATH:/home/valar/.scripts"
 
+
+complete -C /usr/bin/terraform terraform
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias cdi='. cdi'
+alias ff='. ff'
