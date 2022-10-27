@@ -105,6 +105,12 @@ autoload -Uz run-help
 autoload -Uz compinit
 compinit
 
+
+# fzf tab
+# git clone https://github.com/Aloxaf/fzf-tab
+source ~/projects/fzf-tab/fzf-tab.plugin.zsh
+
+
 # arrow-key driven interface for autocomplete menu
 #zstyle ':completion:*' menu select
  
@@ -182,6 +188,7 @@ esac
 
 function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\*\(.*\)/on\1/p'
+    #git branch 2> /dev/null | sed -n -e 's/^\*\(.*\)/\1/p'
 }
 #COLOR_GIT=$'\u001b[31m'
 setopt PROMPT_SUBST
@@ -264,6 +271,7 @@ precmd() {
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
+    #alias ls='ls --classify --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
@@ -284,20 +292,10 @@ if [ -x /usr/bin/dircolors ]; then
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fi
 
-# Aliases
-# alias ls='ls -l --color=auto'
-alias ls='ls --color=auto'
-alias l='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias tr='tree -L 3 -C'
-alias gdb='gdb -q'
-alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
-alias la='ls -A'
-alias d='docker'
-alias t='terraform'
-alias p='python3'
-alias wf='nmcli d wifi connect'
-alias g='git'
+
+
+# alias sc='. sc' # this is needed to not run in a subshell, and allow the script to change my dir
+
 # alias code='dbus-launch code' # no longer needed
 
 # autopushd
@@ -359,3 +357,39 @@ chpwd() {
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+
+# Fuzzy Finder Command Search
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+
+# Aliases
+# alias ls='ls -l --color=auto'
+#alias ls='ls --classify --color=auto'
+alias l='ls --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto --classify'
+alias tr='tree -L 3 -C'
+alias gdb='gdb -q'
+alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
+alias la='ls -A'
+alias d='docker'
+alias tf='terraform'
+alias p='python3'
+alias g='git'
+alias cat='bat --paging=never --theme="base16"'
+
+# fzr scripts
+# I LOVE THEESE
+alias v='vi -o $(find "." -type f | fzf)'
+alias fd='. fd' # fuzzy directory
+#
+alias cdi='. cdi' # change directory interactively, even hidden ones - the big guns :)
+alias f='. /home/valar/.shellscripts/f' # find wrapper
+#alias v='vi -o `fzf`' # vim fuzzy - fuzzy find a file recurssively from pwd and open in vim
+#alias vif='vi -o `$(find -name "**" -type f | fzf)`'
+
+# other
+alias top='btop'
+alias nix='nix-env_wrapper'
