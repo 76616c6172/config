@@ -392,4 +392,4 @@ alias f='. /home/valar/.shellscripts/f' # find wrapper
 
 # other
 alias top='btop'
-alias nix='nix-env_wrapper'
+alias nix='nix-env-wrapper'
