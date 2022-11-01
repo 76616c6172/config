@@ -369,7 +369,7 @@ complete -o nospace -C /usr/bin/terraform terraform
 #alias ls='ls --classify --color=auto'
 alias l='ls --color=auto'
 alias ls='ls --color=auto'
-alias ll='ls -l --color=auto --classify'
+alias ll='ls -l --color=auto'
 alias tr='tree -L 3 -C'
 alias gdb='gdb -q'
 alias tmux='tmux -2u' # forces tmux into accepting colors and special charactes
@@ -389,7 +389,9 @@ alias cdi='. cdi' # change directory interactively, even hidden ones - the big g
 alias f='. /home/valar/.shellscripts/f' # find wrapper
 #alias v='vi -o `fzf`' # vim fuzzy - fuzzy find a file recurssively from pwd and open in vim
 #alias vif='vi -o `$(find -name "**" -type f | fzf)`'
+alias vi='nvim'
 
 # other
 alias top='btop'
-alias nix='nix-env-wrapper'
+
+alias nix='n-i-x'
