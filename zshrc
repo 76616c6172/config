@@ -108,7 +108,8 @@ compinit
 
 # fzf tab
 # git clone https://github.com/Aloxaf/fzf-tab
-source ~/projects/fzf-tab/fzf-tab.plugin.zsh
+#source ~/projects/fzf-tab/fzf-tab.plugin.zsh
+source ~/.configuration/fzf/fzf-tab.plugin.zsh
 
 
 # arrow-key driven interface for autocomplete menu
