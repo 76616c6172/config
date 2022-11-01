@@ -1,5 +1,9 @@
 {
-  "cssTheme": "Shimmering Focus",
+  "cssTheme": "",
   "theme": "obsidian",
-  "baseFontSize": 16
+  "baseFontSize": 16,
+  "translucency": false,
+  "accentColor": "",
+  "showViewHeader": false,
+  "monospaceFontFamily": "mononoki"
 }

@@ -1,4 +1,9 @@
-{ "keyboard.dispatch": "keyCode",
+
+{
+	"files.exclude": {
+			"**/._*": true
+	},
+	"keyboard.dispatch": "keyCode",
 	"update.mode": "manual",
 	"extensions.autoUpdate": false,
 	"extensions.autoCheckUpdates": false,
@@ -83,6 +88,9 @@
 		".*": true
 		},
 	"go.buildOnSave": "off",
+	"go.gopath": "/home/valar/projects/go-dev/src/",
+	//"go.inferGopath": true,
+	//"go.goroot": "/home/valar/projects/go-dev/pkg/mod/",
 	"go.useLanguageServer": true,
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
@@ -91,7 +99,7 @@
 	},
 	"[go]": {
 		"editor.codeActionsOnSave": {
-			"editor.formatOnSave": false,
+			"editor.formatOnSave": true,
 			"source.organizeImports": true,
 		},
 	},
@@ -110,7 +118,7 @@
 			//"complete.Unimported": true,
 			"deepCompletion": true,
 		},
-		"go.lintOnSave": "file",
+		"go.lintOnSave": "workspace",
 		//"latex.server.autoDownload": true,
 		//"latex-workshop.message.update.show": false,
 		"go.toolsManagement.autoUpdate": true,
@@ -130,6 +138,22 @@
 		"workbench.colorTheme": "Horizon",
 		"workbench.iconTheme": "eq-material-theme-icons-darker",
 		"editor.minimap.enabled": false,
+		"editor.inlineSuggest.enabled": true,
+		"github.copilot.enable": {
+			"*": false,
+			"yaml": false,
+			"plaintext": false,
+			"markdown": false,
+			"terraform": false,
+			"go": false
+		},
+		"go.coverOnTestPackage": false,
+		"go.enableCodeLens": {
+			"references": true,
+			"runtest": false
+		},
+		"go.formatTool": "gofmt",
+		"go.logging.level": "verbose",
 		//"haskell.formattingProvider": "none"
 		
 }
