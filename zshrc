@@ -174,6 +174,8 @@ setopt hist_verify            # show command with history expansion to user befo
 # force zsh to show the complete history
 alias history="history 0"
 
+
+
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -221,11 +223,21 @@ if [ "$USER" = valar ]; then
 #
 #
 #
-
+# set prompt symbol color
+SYMBOL_COLOR="green"
+# check if we're in a nix shell
+IS_NIX_SHELL=false
+SYMB='§'
+if  [[ $PATH == *"nix/store"* ]] ; then
+  IS_NIX_SHELL=true
+  SYMB='❄'
+  SYMBOL_COLOR="default"
+  #echo "nix shell loaded"
+fi
 
 #PROMPT=$'%F{%(#.white.white)}╔═ 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
 #RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
-PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{green}§%(#.%F{red}#.%F)%B%F{reset} '
+PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{$SYMBOL_COLOR}$SYMB%(#.%F{red}#.%F)%B%F{reset} '
 RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
