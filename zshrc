@@ -405,6 +405,5 @@ alias f='. /home/valar/.shellscripts/f' # find wrapper
 alias vi='nvim'
 
 # other
-alias top='btop'
-
+#alias top='btop'
 alias nix='n-i-x'
