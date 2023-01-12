@@ -4,13 +4,8 @@
  
 READNULLCMD=${PAGER:-/usr/bin/pager}
  
-# An array to note missing features to ease diagnosis in case of problems.
 typeset -ga debian_missing_features
- 
-# if [[ -z "${DEBIAN_PREVENT_KEYBOARD_CHANGES-}" ]] &&
-#    [[ "$TERM" != 'emacs' ]]
-# then
- 
+
     typeset -A key
     key=(
         BackSpace  "${terminfo[kbs]}"
@@ -46,26 +41,6 @@ typeset -ga debian_missing_features
         done
     }
  
-    # bind2maps emacs             -- BackSpace   backward-delete-char
-    # bind2maps       viins       -- BackSpace   vi-backward-delete-char
-    # bind2maps             vicmd -- BackSpace   vi-backward-char
-    # bind2maps emacs             -- Home        beginning-of-line
-    # bind2maps       viins vicmd -- Home        vi-beginning-of-line
-    # bind2maps emacs             -- End         end-of-line
-    # bind2maps       viins vicmd -- End         vi-end-of-line
-    # bind2maps emacs viins       -- Insert      overwrite-mode
-    # bind2maps             vicmd -- Insert      vi-insert
-    # bind2maps emacs             -- Delete      delete-char
-    # bind2maps       viins vicmd -- Delete      vi-delete-char
-    # bind2maps emacs viins vicmd -- Up          up-line-or-history
-    # bind2maps emacs viins vicmd -- Down        down-line-or-history
-    # bind2maps emacs             -- Left        backward-char
-    # bind2maps       viins vicmd -- Left        vi-backward-char
-    # bind2maps emacs             -- Right       forward-char
-    # bind2maps       viins vicmd -- Right       vi-forward-char
- 
-    # Make sure the terminal is in application mode, when zle is
-    # active. Only then are the values from $terminfo valid.
     if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
         function zle-line-init () {
             emulate -L zsh
@@ -86,9 +61,6 @@ typeset -ga debian_missing_features
  
     unfunction bind2maps
  
-# fi # [[ -z "$DEBIAN_PREVENT_KEYBOARD_CHANGES" ]] && [[ "$TERM" != 'emacs' ]]
-
-# tab completion
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin  \
                                            /usr/local/bin   \
                                            /usr/sbin        \
@@ -97,6 +69,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin  \
                                            /bin             \
                                            /usr/X11R6/bin   \
                                            /home/$USER/Apps \
+                                           /home/$USER/.local/bin \
  
 (( ${+aliases[run-help]} )) && unalias run-help
 autoload -Uz run-help
@@ -105,16 +78,8 @@ autoload -Uz run-help
 autoload -Uz compinit
 compinit
 
-
-# fzf tab
-# git clone https://github.com/Aloxaf/fzf-tab
-#source ~/projects/fzf-tab/fzf-tab.plugin.zsh
 source ~/.configuration/fzf/fzf-tab.plugin.zsh
 
-
-# arrow-key driven interface for autocomplete menu
-#zstyle ':completion:*' menu select
- 
 # History in cache directory:
 HISTSIZE=20000
 SAVEHIST=20000
@@ -124,10 +89,6 @@ setopt SHARE_HISTORY
 # Enable colors and change prompt:
 autoload -U colors && colors
 
-#PS1="%B% %F{#5f5ff}%n@%M%f%F{#5f5ff}%}:%f%F{#5f5fff}%}%~%}%f%F{#85f5fff}%}$%b %f% "
-#PS1="%B% %F{#5f00ff}%n@%M%f%F{#87ffaf}%}:%f%F{#5f5fff}%}%~%}%f%F{#87ffaf}%}$%b %f% "
-#PS1="%B%{%F{#87ffaf}%}%n@%M %f%{%F{#5f00ff}%}%~%}%f%b$ "
- 
 # vim mode!
 set -o vi
 # reverse porting CTRL+R shell search from emacs bindings because I like it!
@@ -135,8 +96,8 @@ bindkey "^R" history-incremental-search-backward
 
 # export path
 export PATH="$HOME/Apps:$PATH"
-export PATH="/home/$USER/Tools/bin:/home/$USER/.shellscripts:$PATH"
-export PATH="$PATH:$(go env GOPATH)/bin"
+export PATH="/home/$USER/Tools/bin:/home/$USER/.shellscripts:$PATH:/home/$USER/.local/bin:$(go env GOPATH)/bin"
+#export PATH="$PATH:$(go env GOPATH)/bin"
 export EDITOR="vi"
 
 ## EXPERIMENTAL
@@ -198,54 +159,14 @@ setopt PROMPT_SUBST
 
 # Prompt
 if [ "$USER" = valar ]; then
-	# PROMPT=$'%b%F{%(#.white.white)}「%B%F{reset}%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.white.white)} 」%B%(#.%F{blue}$§.%F{green}§)%b%F{reset} '        
-  # #.white.white)
-
-#    PROMPT=$'%F{%(#.white.white)}┌──%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
-#      RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
-
-
-    #PROMPT=$'%F{%(#.white.white)}████╗\n██╔═╝%F{%(#.white.white)}「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n╚═╝%(#.%F{blue}$§.%F{blue}§)%(#.%F{red}#.%F)%B%F{reset} '
-      #RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
-      
-# ═
-# ╔═
-# ╗
-# ╝
-#
-# ╔═══╗
-# ║ ╔═╝
-# ╚═╝
-# ╔═╗
-# ║ ║
-# ╚═╝
-#
-#
-#
-#
 # set prompt symbol color
-SYMBOL_COLOR="green"
-# check if we're in a nix shell
-IS_NIX_SHELL=false
-SYMB='§'
-if  [[ $PATH == *"nix/store"* ]] ; then
-  IS_NIX_SHELL=true
-  SYMB='❄'
-  SYMBOL_COLOR="default"
-  #echo "nix shell loaded"
-fi
+SYMBOL_COLOR="magenta"
+SYMB='>'
 
-#PROMPT=$'%F{%(#.white.white)}╔═ 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」$(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
-#RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{$SYMBOL_COLOR}$SYMB%(#.%F{red}#.%F)%B%F{reset} '
 RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
-#PROMPT=$'%F{%(#.white.white)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.white)}%n%(#.💀.㉿)%m%b%F{%(#.blue.white)})-「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」\n└─%B%(#.%F{red}#.%F{#.white.white}§)%b%F{reset} '
-#RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-#RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
-#PROMPT=$'%F{%(#.white.white)}╔═ 「%F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} 」%F{%(#.white.white)}as %B%F{%(#.red.white)}%n@%m%b%F{%(#.blue.white)} $(parse_git_branch)\n╚%F{%#.white.white)}%F{blue}§%(#.%F{red}#.%F)%B%F{reset} '
-#RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{green}§%(#.%F{red}#.%F)%B%F{reset} '
 RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
@@ -263,8 +184,8 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-#new_line_before_prompt=''
-new_line_before_prompt='yes'
+new_line_before_prompt=''
+#new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
     print -Pn "$TERM_TITLE"
@@ -305,24 +226,6 @@ if [ -x /usr/bin/dircolors ]; then
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fi
 
-
-
-# alias sc='. sc' # this is needed to not run in a subshell, and allow the script to change my dir
-
-# alias code='dbus-launch code' # no longer needed
-
-# autopushd
-# DIRSTACKFILE="$HOME/.cache/zsh/dirs"
-# if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-#   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-#   [[ -d $dirstack[1] ]] && cd $dirstack[1]
-# fi
-# # called everytime pwd is changed
-# chpwd() {
-#   print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-# }
-
-
 # autopushd
 #DIRSTACKSIZE=10
 #DIRSTACKFILE=~/.cache/zsh/dirstack
@@ -333,17 +236,6 @@ setopt pushdsilent
 setopt pushdminus
 DIRSTACKSIZE=9
 
-# FIXME currently only saves the last directory on shell close
-# DIRSTACKFILE=~/.zdirs
-# load dirs into stack from given file.
-# if [[ -f $DIRSTACKFILE && $#dirstack -eq 0 ]]; then
-#     dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-#     [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
-# fi
-## At last we add a function to store dirs stack on dir change.
-# function chpwd () {
-#     print -l $PWD ${(u)dirstack} > $DIRSTACKFILE
-#}
 
 # Alternate dirstack
 DIRSTACKFILE=~/.cache/zsh/dirstack
@@ -356,15 +248,6 @@ chpwd() {
   print -l $PWD ${(u)dirstack} >> $DIRSTACKFILE
 }
 
-
-#
-# enable auto-suggestions based on the history
-#if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-#    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#    # change suggestion color
-#    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
-#fi
-
 # Haskell environment
 [ -f "/home/valar/.ghcup/env" ] && source "/home/valar/.ghcup/env" # ghcup-env
 
@@ -374,8 +257,6 @@ complete -o nospace -C /usr/bin/terraform terraform
 
 # Fuzzy Finder Command Search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
 
 # Aliases
 # alias ls='ls -l --color=auto'
@@ -392,6 +273,7 @@ alias tf='terraform'
 alias p='python3'
 alias g='git'
 alias cat='bat --paging=never --theme="base16"'
+alias battery_level='upower -d /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | head -n 1'
 
 # fzr scripts
 # I LOVE THEESE
@@ -400,9 +282,8 @@ alias fd='. fd' # fuzzy directory
 #
 alias cdi='. cdi' # change directory interactively, even hidden ones - the big guns :)
 alias f='. /home/valar/.shellscripts/f' # find wrapper
-#alias v='vi -o `fzf`' # vim fuzzy - fuzzy find a file recurssively from pwd and open in vim
-#alias vif='vi -o `$(find -name "**" -type f | fzf)`'
-alias vi='nvim'
+# alias vi='nvim'
+alias vi='lvim'
 
 # other
 #alias top='btop'
