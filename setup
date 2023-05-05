@@ -66,6 +66,8 @@ full() {
   minimal
   basic
   mkdir -p "$HOME/.cache/zsh" && touch "$HOME/.cache/zsh/dirstack"
+  mkdir -p "$HOME/.config/nix" && echo "build-users-group = nixbld\nexperimental-features = nix-command flakes" > "$HOME/.config/nix/nix.conf" 
+
 
   if ! command -v zsh 2> /dev/null ; then
     echo -e "\033[32;1;4m[*] installing zsh\033[0m" 
