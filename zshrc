@@ -82,7 +82,8 @@ HISTFILE=/home/$USER/.zsh_history
 setopt SHARE_HISTORY
  
 # Enable colors and change prompt:
-autoload -U colors && colors
+# # COLORS
+# autoload -U colors && colors
 
 # vim mode!
 set -o vi
@@ -99,7 +100,6 @@ export EDITOR="vi"
 #setopt autocd              # change directory just by typing its name
 #setopt correct            # auto correct mistakes
 setopt interactivecomments # allow comments in interactive mode
-setopt ksharrays           # arrays start at 0
 setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
 setopt nonomatch           # hide error message if there is no match for the pattern
 setopt notify              # report the status of background jobs immediately
@@ -128,6 +128,7 @@ compinit
 #compinit -d ~/.cache/zcompdump
 #zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
+#
 #
 #
 # custom completion
@@ -215,6 +216,7 @@ precmd() {
 }
 
 # enable color support of ls, less and man, and also add handy aliases
+# DISABLED COLORS
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
