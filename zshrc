@@ -61,24 +61,19 @@ typeset -ga debian_missing_features
  
     unfunction bind2maps
  
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin  \
-                                           /usr/local/bin   \
-                                           /usr/sbin        \
-                                           /usr/bin         \
-                                           /sbin            \
-                                           /bin             \
-                                           /usr/X11R6/bin   \
-                                           /home/$USER/Apps \
-                                           /home/$USER/.local/bin \
- 
-(( ${+aliases[run-help]} )) && unalias run-help
-autoload -Uz run-help
+# WTF is this?
+# zstyle ':completion:*:sudo:*' command-path /usr/local/sbin  \
+#                                            /usr/local/bin   \
+#                                            /usr/sbin        \
+#                                            /usr/bin         \
+#                                            /sbin            \
+#                                            /bin             \
+#                                            /usr/X11R6/bin   \
+#                                            /home/$USER/Apps \
+#                                            /home/$USER/.local/bin \
+# (( ${+aliases[run-help]} )) && unalias run-help
+# autoload -Uz run-help
 
-# advanced completion
-autoload -Uz compinit
-compinit
-
-source ~/.configuration/fzf/fzf-tab.plugin.zsh
 
 # History in cache directory:
 HISTSIZE=20000
@@ -116,11 +111,28 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # hide EOL sign ('%')
 #export PROMPT_EOL_MARK=""
 
+# IMPORTANT FZF COMPLETTION STUFF
+# # VALAR DOES THIS BREAK COMPLETION?
 # enable completion features
-autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
-zstyle ':completion:*:*:*:*:*' menu select
+#autoload -Uz compinit
+#autoload -Uz compinit bashcompinit
+source ~/.configuration/fzf/fzf-tab.plugin.zsh
+autoload -Uz compinit bashcompinit
+bashcompinit
+compinit
+
+#
+# do i need these?
+#
+#
+#compinit -d ~/.cache/zcompdump
+#zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
+#
+#
+# custom completion
+complete -o nospace -C /usr/bin/terraform terraform
+complete -C v v
 
 # History configurations
 HISTFILE=~/.zsh_history
@@ -160,10 +172,11 @@ setopt PROMPT_SUBST
 # Prompt
 if [ "$USER" = valar ]; then
 # set prompt symbol color
-SYMBOL_COLOR="magenta"
+SYMBOL_COLOR="green"
 SYMB='>'
 
 PROMPT=$'%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{$SYMBOL_COLOR}$SYMB%(#.%F{red}#.%F)%B%F{reset} '
+#PROMPT=$'%n@%m%F{%(#.white.white)} %F{%(#.blue.blue)}%(6~.%-1~/…/%4~.%5~)%b%F{reset}%F{%(#.blue.white)} $(parse_git_branch)\n%F{%#.white.white)}%F{$SYMBOL_COLOR}$SYMB%(#.%F{red}#.%F)%B%F{reset} '
 RPROMPT=$'%(?.. %? %F{red}%B•%b%F{reset})%(1j. %j %F{blue}%B⚙%b%F{reset}.)'
 
 else
@@ -184,8 +197,8 @@ xterm*|rxvt*)
 esac
 
 # set if you want a newline before each prompt
-new_line_before_prompt=''
-#new_line_before_prompt='yes'
+#new_line_before_prompt=''
+new_line_before_prompt='yes'
 precmd() {
     # Print the previously configured title
     print -Pn "$TERM_TITLE"
@@ -251,8 +264,7 @@ chpwd() {
 # Haskell environment
 [ -f "/home/valar/.ghcup/env" ] && source "/home/valar/.ghcup/env" # ghcup-env
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
+#autoload -U +X bashcompinit && bashcompinit
 
 
 # Fuzzy Finder Command Search
@@ -272,19 +284,44 @@ alias d='docker'
 alias tf='terraform'
 alias p='python3'
 alias g='git'
-alias cat='bat --paging=never --theme="base16"'
+alias cat='bat --paging=never --style=plain --theme="base16"'
 alias battery_level='upower -d /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | head -n 1'
+alias ts='ts-node'
 
 # fzr scripts
 # I LOVE THEESE
-alias v='vi -o $(find "." -type f | fzf)'
+#alias v='vi -o $(find "." -type f | fzf)'
+#alias v='vulpixcli'
 alias fd='. fd' # fuzzy directory
 #
 alias cdi='. cdi' # change directory interactively, even hidden ones - the big guns :)
 alias f='. /home/valar/.shellscripts/f' # find wrapper
 # alias vi='nvim'
-alias vi='lvim'
+alias vi='vim'
+#alias mamba='micromamba'
 
 # other
 #alias top='btop'
 alias nix='n-i-x'
+alias c='code'
+alias conda='micromamba'
+alias ?='v chat'
+alias m='modal'
+
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+export MAMBA_EXE="/home/valar/.local/bin/micromamba";
+export MAMBA_ROOT_PREFIX="/home/valar/micromamba";
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    if [ -f "/home/valar/micromamba/etc/profile.d/micromamba.sh" ]; then
+        . "/home/valar/micromamba/etc/profile.d/micromamba.sh"
+    else
+        export  PATH="/home/valar/micromamba/bin:$PATH"  # extra space after export prevents interference from conda init
+    fi
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<

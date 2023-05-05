@@ -1,9 +1,11 @@
 {
-  "cssTheme": "",
+  "cssTheme": "GitHub theme",
   "theme": "obsidian",
   "baseFontSize": 16,
   "translucency": false,
   "accentColor": "",
   "showViewHeader": false,
-  "monospaceFontFamily": "mononoki"
+  "monospaceFontFamily": "mononoki",
+  "baseFontSizeAction": false,
+  "nativeMenus": false
 }
